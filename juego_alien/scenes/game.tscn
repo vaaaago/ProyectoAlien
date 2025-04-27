@@ -1,0 +1,81 @@
+[gd_scene load_steps=7 format=3 uid="uid://cw3xjhbf27twl"]
+
+[ext_resource type="PackedScene" uid="uid://bs72ogkvdd7d6" path="res://addons/proto_controller/proto_controller.tscn" id="1_uwrxv"]
+[ext_resource type="Script" uid="uid://btefbfjhrskrr" path="res://scripts/game.gd" id="1_yqjtg"]
+[ext_resource type="PackedScene" uid="uid://bfovatv4sv4ou" path="res://scenes/world/world_map.tscn" id="3_lnu2h"]
+
+[sub_resource type="Environment" id="Environment_lnu2h"]
+background_energy_multiplier = 0.5
+
+[sub_resource type="FontVariation" id="FontVariation_lnu2h"]
+
+[sub_resource type="FontVariation" id="FontVariation_lbhrr"]
+
+[node name="Game" type="Node3D"]
+script = ExtResource("1_yqjtg")
+
+[node name="Player" parent="." instance=ExtResource("1_uwrxv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.41086, 0.0408618, 1.26197)
+can_sprint = true
+can_freefly = true
+
+[node name="WorldMap" parent="." instance=ExtResource("3_lnu2h")]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_lnu2h")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="MultiplayerHUD" type="Control" parent="CanvasLayer"]
+unique_name_in_owner = true
+layout_mode = 3
+anchor_left = 0.104
+anchor_top = 0.035
+anchor_right = 0.104
+anchor_bottom = 0.035
+offset_left = -233.808
+offset_top = 27.32
+offset_right = -133.808
+offset_bottom = 97.32
+
+[node name="Panel" type="Panel" parent="CanvasLayer/MultiplayerHUD"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 2.01
+anchor_top = -0.071
+anchor_right = 3.01
+anchor_bottom = 1.0
+offset_top = -0.0299997
+offset_right = -3.05176e-05
+offset_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MultiplayerHUD/Panel"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="HostGame" type="Button" parent="CanvasLayer/MultiplayerHUD/Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = SubResource("FontVariation_lnu2h")
+theme_override_font_sizes/font_size = 15
+text = "Host Game"
+
+[node name="JoinGame" type="Button" parent="CanvasLayer/MultiplayerHUD/Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = SubResource("FontVariation_lbhrr")
+theme_override_font_sizes/font_size = 15
+text = "Join Game"
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("uid://d5jkbe6vrsdn")
+spawn_path = NodePath("../Players")
+spawn_limit = 4
+
+[node name="Players" type="Node3D" parent="."]
+
+[connection signal="pressed" from="CanvasLayer/MultiplayerHUD/Panel/VBoxContainer/HostGame" to="." method="become_host"]
+[connection signal="pressed" from="CanvasLayer/MultiplayerHUD/Panel/VBoxContainer/JoinGame" to="." method="join_game"]
+
+[editable path="Player"]

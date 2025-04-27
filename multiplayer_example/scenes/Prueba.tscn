@@ -64,3 +64,9 @@ input_right = "move_right"
 input_forward = "move_up"
 input_back = "move_down"
 input_jump = "jump"
+
+[node name="Label" type="Label" parent="ProtoController"]
+offset_right = 40.0
+offset_bottom = 23.0
+
+[editable path="ProtoController"]

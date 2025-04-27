@@ -43,6 +43,7 @@ extends CharacterBody3D
 @export var input_sprint : String = "sprint"
 ## Name of Input Action to toggle freefly mode.
 @export var input_freefly : String = "freefly"
+@onready var label: Label = $Label
 
 var mouse_captured : bool = false
 var look_rotation : Vector2
@@ -57,6 +58,14 @@ func _ready() -> void:
 	check_input_mappings()
 	look_rotation.y = rotation.y
 	look_rotation.x = head.rotation.x
+	
+func setup(player_object: Statics.PlayerData):
+	# Seteamos el nombre del nodo de forma de que sea unico
+	name = str(player_object.id)
+	label.text = player_object.name
+	
+	#Seteamos la autoridad del peer con id: player_object.id sobre este nodo de jugador
+	set_multiplayer_authority(player_object.id)
 
 func _unhandled_input(event: InputEvent) -> void:
 	# Mouse capturing
