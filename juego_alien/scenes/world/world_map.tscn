@@ -1,24 +1,26 @@
 [gd_scene format=3 uid="uid://bfovatv4sv4ou"]
 
 [node name="WorldMap" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0645781, 0)
 
 [node name="Piso" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0100448, -0.0570868, -0.396406)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.762847, -0.0570868, 14.4129)
 use_collision = true
-size = Vector3(17.2192, 0.123535, 27.1402)
+size = Vector3(44.253, 0.123535, 67.1431)
 
 [node name="Murallas" type="CSGCombiner3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0243857, 0)
 use_collision = true
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="Murallas"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.05841, 0.510373, -1.77764)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.6401, 0.510373, 15.4204)
 size = Vector3(0.393677, 1, 5.54248)
 
 [node name="CSGBox3D3" type="CSGBox3D" parent="Murallas"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.757292, 0.612006, 6.32631)
-size = Vector3(0.393677, 1, 8.26404)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.1565, 1.93387, 34.6257)
+size = Vector3(0.393677, 3.98779, 8.26404)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 5.07797, 0)
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, -7.87422, 17.5226, 0)
 light_energy = 2.0
 shadow_enabled = true

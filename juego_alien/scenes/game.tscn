@@ -1,11 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://cw3xjhbf27twl"]
+[gd_scene load_steps=5 format=3 uid="uid://crv23qyeek0lx"]
 
-[ext_resource type="PackedScene" uid="uid://bs72ogkvdd7d6" path="res://addons/proto_controller/proto_controller.tscn" id="1_uwrxv"]
 [ext_resource type="Script" uid="uid://btefbfjhrskrr" path="res://scripts/game.gd" id="1_yqjtg"]
 [ext_resource type="PackedScene" uid="uid://bfovatv4sv4ou" path="res://scenes/world/world_map.tscn" id="3_lnu2h"]
-
-[sub_resource type="Environment" id="Environment_lnu2h"]
-background_energy_multiplier = 0.5
 
 [sub_resource type="FontVariation" id="FontVariation_lnu2h"]
 
@@ -14,15 +10,8 @@ background_energy_multiplier = 0.5
 [node name="Game" type="Node3D"]
 script = ExtResource("1_yqjtg")
 
-[node name="Player" parent="." instance=ExtResource("1_uwrxv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.41086, 0.0408618, 1.26197)
-can_sprint = true
-can_freefly = true
-
 [node name="WorldMap" parent="." instance=ExtResource("3_lnu2h")]
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_lnu2h")
+transform = Transform3D(1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, 13.642, 0, 0)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -68,14 +57,8 @@ theme_override_fonts/font = SubResource("FontVariation_lbhrr")
 theme_override_font_sizes/font_size = 15
 text = "Join Game"
 
-[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("uid://d5jkbe6vrsdn")
-spawn_path = NodePath("../Players")
-spawn_limit = 4
-
-[node name="Players" type="Node3D" parent="."]
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.587785, 0.809017, 0, -0.809017, 0.587785, -0.748367, 18.5339, 25.7287)
 
 [connection signal="pressed" from="CanvasLayer/MultiplayerHUD/Panel/VBoxContainer/HostGame" to="." method="become_host"]
 [connection signal="pressed" from="CanvasLayer/MultiplayerHUD/Panel/VBoxContainer/JoinGame" to="." method="join_game"]
-
-[editable path="Player"]
