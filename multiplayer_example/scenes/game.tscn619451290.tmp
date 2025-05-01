@@ -1,6 +1,5 @@
-[gd_scene load_steps=5 format=3 uid="uid://crv23qyeek0lx"]
+[gd_scene load_steps=4 format=3 uid="uid://2pk8tajgquqb"]
 
-[ext_resource type="Script" uid="uid://btefbfjhrskrr" path="res://scripts/game.gd" id="1_yqjtg"]
 [ext_resource type="PackedScene" uid="uid://bfovatv4sv4ou" path="res://scenes/world/world_map.tscn" id="3_lnu2h"]
 
 [sub_resource type="FontVariation" id="FontVariation_lnu2h"]
@@ -8,7 +7,6 @@
 [sub_resource type="FontVariation" id="FontVariation_lbhrr"]
 
 [node name="Game" type="Node3D"]
-script = ExtResource("1_yqjtg")
 
 [node name="WorldMap" parent="." instance=ExtResource("3_lnu2h")]
 transform = Transform3D(1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, 13.642, 0, 0)
@@ -57,11 +55,8 @@ theme_override_fonts/font = SubResource("FontVariation_lbhrr")
 theme_override_font_sizes/font_size = 15
 text = "Join Game"
 
-[node name="Overworld_Camera" type="Camera3D" parent="."]
+[node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.587785, 0.809017, 0, -0.809017, 0.587785, -0.748367, 18.5339, 25.7287)
-
-[node name="Players" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12.3837, 0)
 
 [connection signal="pressed" from="CanvasLayer/MultiplayerHUD/Panel/VBoxContainer/HostGame" to="." method="become_host"]
 [connection signal="pressed" from="CanvasLayer/MultiplayerHUD/Panel/VBoxContainer/JoinGame" to="." method="join_game"]

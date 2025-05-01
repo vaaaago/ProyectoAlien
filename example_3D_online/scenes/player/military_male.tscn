@@ -166,7 +166,7 @@ bind/44/pose = Transform3D(-0.00992796, 9.57188e-05, -0.00119373, -0.00119654, -
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"male_animation_lib": ExtResource("1_5i668")
+&"male_animation_lib": ExtResource("1_5i668")
 }
 
 [node name="RootNode" type="Node3D" parent="."]

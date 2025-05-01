@@ -7,11 +7,12 @@ const ADDRESS = "127.0.0.1"
 
 var connected_peer_ids = []
 
+
+
 func become_host():
 	print("Becoming Host")
 	multiplayer_peer.create_server(PORT)
 	multiplayer.multiplayer_peer = multiplayer_peer
-	
 	add_player_character(1)  #el host tiene ID = 1
 	multiplayer.peer_connected.connect(
 		func(new_peer_id):
@@ -30,7 +31,13 @@ func add_player_character(peer_id):
 	connected_peer_ids.append(peer_id)
 	var player_character = preload("res://scenes/player/Multiplayer_Player.tscn").instantiate()
 	player_character.set_multiplayer_authority(peer_id)
-	add_child(player_character)
+	var _players_location = get_tree().get_current_scene().get_node_or_null("Players")
+	if _players_location:
+		print("Node found!")
+	else:
+		print("Node not found!")
+	_players_location.add_child(player_character)
+	
 	
 @rpc
 func add_newly_connected_player_character(new_peer_id):

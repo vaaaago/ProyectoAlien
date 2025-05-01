@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://2pk8tajgquqb"]
+
+[ext_resource type="PackedScene" uid="uid://bfovatv4sv4ou" path="res://scenes/world/world_map.tscn" id="3_lnu2h"]
+
+[node name="Game" type="Node3D"]
+
+[node name="WorldMap" parent="." instance=ExtResource("3_lnu2h")]
+transform = Transform3D(1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, 13.642, 0, 0)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.587785, 0.809017, 0, -0.809017, 0.587785, -0.748367, 18.5339, 25.7287)

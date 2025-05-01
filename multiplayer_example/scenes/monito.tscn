@@ -1,5 +1,0 @@
-[gd_scene format=3 uid="uid://cmbf8wai03omt"]
-
-[node name="Monito" type="Node3D"]
-
-[node name="Skeleton3D" type="Skeleton3D" parent="."]
