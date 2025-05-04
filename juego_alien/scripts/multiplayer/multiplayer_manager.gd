@@ -33,9 +33,10 @@ func add_player_character(peer_id):
 	player_character.set_multiplayer_authority(peer_id)
 	var _players_location = get_tree().get_current_scene().get_node_or_null("Players")
 	if _players_location:
-		print("Node found!")
+		pass
+		#print("Node found!")
 	else:
-		print("Node not found!")
+		print("Node not found at add_player_character on multiplayer_manager.gd!")
 	_players_location.add_child(player_character)
 	
 	

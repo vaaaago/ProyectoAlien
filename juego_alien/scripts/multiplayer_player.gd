@@ -8,6 +8,8 @@ extends CharacterBody3D
 var look_sensitivity = ProjectSettings.get_setting("player/look_sensitivity")
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var SPEED = 10
+var input_enabled := true
+var canInteract : bool
 
 func _ready():
 	name = str(get_multiplayer_authority())
@@ -20,7 +22,9 @@ func _physics_process(delta):
 	if not is_multiplayer_authority(): return
 	
 	var input_dir = Input.get_vector("move_left", "move_right", "move_forward","move_backward")
-	print(input_dir)
+	#print(input_dir)
+	if not input_enabled:
+		input_dir = Vector2.ZERO
 	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	if direction:
 		velocity.x = direction.x * SPEED
@@ -31,18 +35,25 @@ func _physics_process(delta):
 		
 	if is_on_floor():
 		velocity.y = 0
-		if Input.is_action_just_pressed("jump"): velocity.y = jump_velocity
+		if Input.is_action_just_pressed("jump") and input_enabled: velocity.y = jump_velocity
 	else:
 		velocity.y -= gravity * delta
 	remote_set_position.rpc(global_position) #envía la velocidad del jugador
 	move_and_slide()
-	if Input.is_action_just_pressed("ui_cancel"): #al presionar ESC
-		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED if Input.mouse_mode == Input.MOUSE_MODE_VISIBLE else Input.MOUSE_MODE_VISIBLE
+	
+	if Input.is_action_just_pressed("ui_cancel"): #al presionar ESC+
+		if Input.mouse_mode == Input.MOUSE_MODE_VISIBLE:
+			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+			input_enabled = true
+		else: 
+			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+			input_enabled = false
+	
 		
 func _unhandled_input(event):
-	if not is_multiplayer_authority(): return
+	if not is_multiplayer_authority() or not input_enabled: return
 	
-	if event is InputEventMouseMotion:
+	if event is InputEventMouseMotion :
 		global_rotation.y += -event.relative.x * look_sensitivity
 		camera.rotate_x(-event.relative.y * look_sensitivity)
 		camera.rotation.x = clamp(camera.rotation.x, -PI/2, PI/2)
