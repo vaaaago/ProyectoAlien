@@ -9,7 +9,6 @@ var look_sensitivity = ProjectSettings.get_setting("player/look_sensitivity")
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var SPEED = 10
 var input_enabled := true
-var canInteract : bool
 
 func _ready():
 	name = str(get_multiplayer_authority())
