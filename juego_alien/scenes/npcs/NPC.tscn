@@ -1,0 +1,46 @@
+[gd_scene load_steps=7 format=3 uid="uid://cyhwyyaw67eue"]
+
+[ext_resource type="Script" uid="uid://kdcn5xvatn53" path="res://scripts/npcs/npc.gd" id="1_k75in"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_18e1m"]
+
+[sub_resource type="ImageTexture" id="ImageTexture_vu8k4"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fwc6w"]
+albedo_color = Color(0.995207, 0.974251, 0.955698, 1)
+albedo_texture = SubResource("ImageTexture_vu8k4")
+uv1_offset = Vector3(0, 0.2, 0)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_fwc6w"]
+
+[sub_resource type="FontFile" id="FontFile_k75in"]
+cache/0/34/0/ascent = 0.0
+cache/0/34/0/descent = 0.0
+cache/0/34/0/underline_position = 0.0
+cache/0/34/0/underline_thickness = 0.0
+cache/0/34/0/scale = 1.0
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+
+[node name="NPC" type="CharacterBody3D" groups=["NPC"]]
+script = ExtResource("1_k75in")
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="."]
+transform = Transform3D(-2, 0, -1.74846e-07, 0, 2, 0, 1.74846e-07, 0, -2, 0, 1.5171, 0)
+mesh = SubResource("CapsuleMesh_18e1m")
+material = SubResource("StandardMaterial3D_fwc6w")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(-2, 0, -1.74846e-07, 0, 2, 0, 1.74846e-07, 0, -2, -0.000982821, 1.51164, 4.50611e-05)
+shape = SubResource("CapsuleShape3D_fwc6w")
+
+[node name="Name" type="Label3D" parent="."]
+transform = Transform3D(-0.999999, -0.00174533, -8.74228e-08, -0.00174533, 0.999999, 0, 8.74227e-08, 1.52582e-10, -1, -0.0132341, 5.11339, 0.00364494)
+pixel_size = 0.05
+modulate = Color(1, 0.321569, 0, 1)
+text = "!"
+font = SubResource("FontFile_k75in")
+font_size = 34

@@ -14,6 +14,7 @@ func _ready():
 	name = str(get_multiplayer_authority())
 	$Name.text = str(name)
 	if is_multiplayer_authority():
+		Global.player = self        #para tener la variable player globalmente
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 		camera.current = true        #se le pone la cámara correspondiente al jugador que tenga la autoridad
 	
