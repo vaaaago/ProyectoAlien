@@ -1,5 +1,5 @@
 @tool
-extends Area3D
+extends RigidBody3D
 
 @onready var mesh_holder = $Mesh
 
@@ -20,6 +20,9 @@ func _ready():
 			mesh_holder.mesh = mesh_node.mesh
 		else:
 			print(" Could not find MeshInstance3D in the scene.")
+			
+func start_interact():
+	print("interacting with item")
 
 func find_mesh_instance(root: Node) -> MeshInstance3D:
 	for child in root.get_children():

@@ -1,17 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://cyhwyyaw67eue"]
+[gd_scene load_steps=5 format=3 uid="uid://cyhwyyaw67eue"]
 
 [ext_resource type="Script" uid="uid://kdcn5xvatn53" path="res://scripts/npcs/npc.gd" id="1_k75in"]
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_18e1m"]
-
-[sub_resource type="ImageTexture" id="ImageTexture_vu8k4"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fwc6w"]
-albedo_color = Color(0.995207, 0.974251, 0.955698, 1)
-albedo_texture = SubResource("ImageTexture_vu8k4")
-uv1_offset = Vector3(0, 0.2, 0)
+[ext_resource type="PackedScene" uid="uid://3fes6lci8xkr" path="res://assets/character/Rogue_Hooded.glb" id="2_yq5wv"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_fwc6w"]
+height = 1.62957
 
 [sub_resource type="FontFile" id="FontFile_k75in"]
 cache/0/34/0/ascent = 0.0
@@ -28,13 +21,8 @@ cache/0/16/0/scale = 1.0
 [node name="NPC" type="CharacterBody3D" groups=["NPC"]]
 script = ExtResource("1_k75in")
 
-[node name="CSGMesh3D" type="CSGMesh3D" parent="."]
-transform = Transform3D(-2, 0, -1.74846e-07, 0, 2, 0, 1.74846e-07, 0, -2, 0, 1.5171, 0)
-mesh = SubResource("CapsuleMesh_18e1m")
-material = SubResource("StandardMaterial3D_fwc6w")
-
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(-2, 0, -1.74846e-07, 0, 2, 0, 1.74846e-07, 0, -2, -0.000982821, 1.51164, 4.50611e-05)
+transform = Transform3D(-2, 0, -1.74846e-07, 0, 2, 0, 1.74846e-07, 0, -2, -0.000982821, 1.87253, 4.50611e-05)
 shape = SubResource("CapsuleShape3D_fwc6w")
 
 [node name="Name" type="Label3D" parent="."]
@@ -44,3 +32,26 @@ modulate = Color(1, 0.321569, 0, 1)
 text = "!"
 font = SubResource("FontFile_k75in")
 font_size = 34
+
+[node name="Rogue_Hooded" parent="." instance=ExtResource("2_yq5wv")]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
+
+[node name="Knife_Offhand" parent="Rogue_Hooded/Rig/Skeleton3D" index="0"]
+transform = Transform3D(-0.999999, -1.17465e-07, 2.60635e-08, -7.18757e-08, -5.30967e-07, 0.999999, -1.957e-07, 0.999999, 6.23449e-07, 0.883132, 1.04926, -1.63329e-05)
+
+[node name="1H_Crossbow" parent="Rogue_Hooded/Rig/Skeleton3D" index="1"]
+transform = Transform3D(-4.5731e-07, 4.00596e-08, -0.999999, -0.999999, -4.96539e-07, 3.978e-07, -4.43668e-07, 0.999999, -3.07174e-08, -0.778504, 1.04926, -0.0103745)
+
+[node name="2H_Crossbow" parent="Rogue_Hooded/Rig/Skeleton3D" index="2"]
+transform = Transform3D(-4.5731e-07, 4.00596e-08, -0.999999, -0.999999, -4.96539e-07, 3.978e-07, -4.43668e-07, 0.999999, -3.07174e-08, -0.778504, 1.04926, -0.0103745)
+
+[node name="Knife" parent="Rogue_Hooded/Rig/Skeleton3D" index="3"]
+transform = Transform3D(0.999999, 1.88247e-07, -4.39071e-07, -3.79561e-07, -7.95385e-07, -0.999999, -1.1747e-07, 0.999999, -7.42514e-07, -0.883132, 1.04926, -1.60515e-05)
+
+[node name="Throwable" parent="Rogue_Hooded/Rig/Skeleton3D" index="4"]
+transform = Transform3D(0.999999, 2.0298e-07, -4.52757e-07, -3.93247e-07, -6.76176e-07, -0.999999, -1.32203e-07, 0.999999, -6.23305e-07, -0.883132, 1.04926, 0.18023)
+
+[node name="Rogue_Cape" parent="Rogue_Hooded/Rig/Skeleton3D" index="5"]
+transform = Transform3D(1, 1.25214e-21, 0, -1.25214e-21, 1, 0, 0, 0, 1, 0, 1.21587, 0)
+
+[editable path="Rogue_Hooded"]

@@ -1,10 +1,12 @@
-[gd_scene load_steps=8 format=3 uid="uid://crv23qyeek0lx"]
+[gd_scene load_steps=10 format=3 uid="uid://crv23qyeek0lx"]
 
 [ext_resource type="Script" uid="uid://btefbfjhrskrr" path="res://scripts/game.gd" id="1_yqjtg"]
 [ext_resource type="PackedScene" uid="uid://we0qh31mh4ob" path="res://scenes/ui/DialogBox.tscn" id="3_lbhrr"]
 [ext_resource type="PackedScene" uid="uid://bfovatv4sv4ou" path="res://scenes/world/world_map.tscn" id="3_lnu2h"]
 [ext_resource type="PackedScene" uid="uid://742pqeb1s6s7" path="res://scenes/quests/quest_test/QuestItem.tscn" id="4_iywne"]
-[ext_resource type="PackedScene" uid="uid://mx8h84ugjl18" path="res://assets/item/Can_B.gltf" id="5_iywne"]
+[ext_resource type="Texture2D" uid="uid://c36anu74d1y13" path="res://assets/character/crosshair001.png" id="4_p57ef"]
+[ext_resource type="Script" uid="uid://cndmtjn4est1w" path="res://scripts/crosshair.gd" id="4_u5sy4"]
+[ext_resource type="PackedScene" uid="uid://cyhwyyaw67eue" path="res://scenes/npcs/NPC.tscn" id="6_p57ef"]
 
 [sub_resource type="FontVariation" id="FontVariation_lnu2h"]
 
@@ -62,6 +64,38 @@ text = "Join Game"
 
 [node name="DialogBox" parent="CanvasLayer" instance=ExtResource("3_lbhrr")]
 
+[node name="Crosshair" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("4_u5sy4")
+
+[node name="cross" type="TextureRect" parent="CanvasLayer/Crosshair"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_p57ef")
+
 [node name="Overworld_Camera" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.587785, 0.809017, 0, -0.809017, 0.587785, -0.748367, 18.5339, 25.7287)
 
@@ -70,7 +104,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12.3837, 0)
 
 [node name="QuestItem" parent="." instance=ExtResource("4_iywne")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.25237, 2.10121, 0)
-item_mesh = ExtResource("5_iywne")
+
+[node name="NPC" parent="." instance=ExtResource("6_p57ef")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.9732, 0.285527, -11.2136)
 
 [connection signal="pressed" from="CanvasLayer/MultiplayerHUD/Panel/VBoxContainer/HostGame" to="." method="become_host"]
 [connection signal="pressed" from="CanvasLayer/MultiplayerHUD/Panel/VBoxContainer/JoinGame" to="." method="join_game"]

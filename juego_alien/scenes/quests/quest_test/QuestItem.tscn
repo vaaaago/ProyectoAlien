@@ -44,10 +44,11 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_4bat7")
 
-[node name="QuestItem" type="Area3D" groups=["Item"]]
+[node name="QuestItem" type="RigidBody3D" groups=["Item"]]
 script = ExtResource("1_4bat7")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1.1, 0, 0, 0, 1.1, 0, 0, 0, 1.1, 0, 0, 0)
 shape = SubResource("SphereShape3D_4bat7")
 
 [node name="Mesh" type="MeshInstance3D" parent="."]
