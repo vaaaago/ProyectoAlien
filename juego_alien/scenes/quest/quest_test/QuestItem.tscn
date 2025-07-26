@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=4 uid="uid://742pqeb1s6s7"]
 
-[ext_resource type="Script" uid="uid://ldxoqegyt2fy" path="res://scripts/quests/quest_test/quest_item.gd" id="1_4bat7"]
+[ext_resource type="Script" uid="uid://ldxoqegyt2fy" path="res://scripts/quest/quest_test/quest_item.gd" id="1_4bat7"]
 [ext_resource type="Texture2D" uid="uid://tawnav8yvw3d" path="res://assets/Prototype/gltf/prototypebits_texture.png" id="2_4bat7"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_4bat7"]

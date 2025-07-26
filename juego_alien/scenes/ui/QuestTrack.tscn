@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://douf0cqpwaula"]
+
+[node name="QuestTrack" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="ColorRect" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 1
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 205.0
+offset_bottom = 105.0
+color = Color(0.158472, 0.158472, 0.158472, 1)
+
+[node name="Details" type="VBoxContainer" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" type="Label" parent="ColorRect/Details"]
+layout_mode = 2
+text = "Title"
+horizontal_alignment = 1
+
+[node name="Objective" type="VBoxContainer" parent="ColorRect/Details"]
+layout_mode = 2
+size_flags_vertical = 3

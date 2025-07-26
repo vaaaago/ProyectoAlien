@@ -8,7 +8,9 @@ extends CharacterBody3D
 var look_sensitivity = ProjectSettings.get_setting("player/look_sensitivity")
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var SPEED = 10
-var input_enabled := true
+@export var input_enabled:bool = true
+@export var dialog_enabled:bool = false
+var lastTarget = null
 
 func _ready():
 	name = str(get_multiplayer_authority())
@@ -17,6 +19,10 @@ func _ready():
 		Global.player = self        #para tener la variable player globalmente
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 		camera.current = true        #se le pone la cámara correspondiente al jugador que tenga la autoridad
+	while true:
+		await get_tree().create_timer(2.0).timeout
+		print("dialog_enabled: ", dialog_enabled)
+		print("input_enabled: ", input_enabled)
 
 func _physics_process(delta):
 	if not is_multiplayer_authority(): return
@@ -41,14 +47,6 @@ func _physics_process(delta):
 	remote_set_position.rpc(global_position) #envía la velocidad del jugador
 	move_and_slide()
 
-	if Input.is_action_just_pressed("ui_cancel"): #al presionar ESC+
-		if Input.mouse_mode == Input.MOUSE_MODE_VISIBLE:
-			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-			input_enabled = true
-		else:
-			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-			input_enabled = false
-
 #var dialog_box = get_tree().get_current_scene().get_node_or_null("CanvasLayer/DialogBox")
 #if dialog_box:
 	#pass
@@ -59,21 +57,38 @@ func _physics_process(delta):
 #dialog_box.show_dialog("hola q tal") #texto que se pondrá en el diálogo
 
 func _unhandled_input(event):
-	if not is_multiplayer_authority() or not input_enabled: return
+	if not is_multiplayer_authority(): return
 
+	if event.is_action_pressed("ui_cancel"):
+		if dialog_enabled:
+			#print("caso diálogo")
+			lastTarget.get_node("DialogManager").hide_dialog()
+		else:
+			#print("caso normal")
+			if Input.mouse_mode == Input.MOUSE_MODE_VISIBLE:
+				Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+				input_enabled = true
+			else:
+				Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+				input_enabled = false
+
+	if not input_enabled: return
 	if event is InputEventMouseMotion :
 		global_rotation.y += -event.relative.x * look_sensitivity
 		camera.rotate_x(-event.relative.y * look_sensitivity)
 		camera.rotation.x = clamp(camera.rotation.x, -PI/2, PI/2)
 		remote_set_rotation.rpc(global_rotation)
-
+		
 	#para interacciones
 	if event.is_action_pressed("Interact"):
 		var target = $Camera3D/RayCast3D.get_collider()
 		if target != null:
 			if target.is_in_group("NPC"):
 				print("hablando con el NPC")
+				#input_enabled = false
+				#dialog_enabled = true
 				target.start_dialog()
+				lastTarget = target
 			if target.is_in_group("Item"):
 				print("interactuando con item")
 				target.start_interact()

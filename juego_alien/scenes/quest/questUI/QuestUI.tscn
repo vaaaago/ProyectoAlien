@@ -1,0 +1,132 @@
+[gd_scene load_steps=6 format=3 uid="uid://pyeuuhv3ea8i"]
+
+[ext_resource type="Texture2D" uid="uid://d2asmfx0kb16h" path="res://assets/png/circles-tile.png" id="1_kdr6n"]
+[ext_resource type="Script" uid="uid://mc8d18pb3aoq" path="res://scripts/quest/questUI/quest_ui.gd" id="1_ywkb6"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kdr6n"]
+bg_color = Color(0.229991, 0, 0.0638708, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ywkb6"]
+bg_color = Color(0.0646965, 0.0646965, 0.0646965, 1)
+border_color = Color(0.225656, 0.0161128, 0.446061, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_j8cvo"]
+texture = ExtResource("1_kdr6n")
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+modulate_color = Color(0.890196, 0.635294, 0.494118, 1)
+
+[node name="QuestUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ywkb6")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="Panel" type="Panel" parent="CanvasLayer"]
+self_modulate = Color(1, 1, 1, 0.733333)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -400.0
+offset_top = -200.0
+offset_right = 400.0
+offset_bottom = 200.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_kdr6n")
+
+[node name="Backgrounds" type="HBoxContainer" parent="CanvasLayer/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BG_1" type="Panel" parent="CanvasLayer/Panel/Backgrounds"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.57
+theme_override_styles/panel = SubResource("StyleBoxFlat_ywkb6")
+
+[node name="BG_2" type="Panel" parent="CanvasLayer/Panel/Backgrounds"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxTexture_j8cvo")
+
+[node name="Contents" type="VBoxContainer" parent="CanvasLayer/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 15
+
+[node name="Headings" type="HBoxContainer" parent="CanvasLayer/Panel/Contents"]
+layout_mode = 2
+
+[node name="List" type="Label" parent="CanvasLayer/Panel/Contents/Headings"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.57
+theme_override_font_sizes/font_size = 20
+text = "Active Quests"
+horizontal_alignment = 1
+
+[node name="Details" type="Label" parent="CanvasLayer/Panel/Contents/Headings"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 20
+text = "Quest Details"
+horizontal_alignment = 1
+
+[node name="Details" type="HBoxContainer" parent="CanvasLayer/Panel/Contents"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 10
+
+[node name="QuestList" type="VBoxContainer" parent="CanvasLayer/Panel/Contents/Details"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.57
+theme_override_constants/separation = 4
+
+[node name="QuestDetails" type="VBoxContainer" parent="CanvasLayer/Panel/Contents/Details"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 4
+
+[node name="QuestTitle" type="Label" parent="CanvasLayer/Panel/Contents/Details/QuestDetails"]
+layout_mode = 2
+text = "Title"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="QuestDescription" type="Label" parent="CanvasLayer/Panel/Contents/Details/QuestDetails"]
+layout_mode = 2
+text = "Description"
+
+[node name="QuestObjectives" type="VBoxContainer" parent="CanvasLayer/Panel/Contents/Details/QuestDetails"]
+layout_mode = 2
+
+[node name="CloseButton" type="Button" parent="CanvasLayer/Panel"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -31.0
+offset_top = 1.0
+offset_right = -1.0
+offset_bottom = 31.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 15
+text = "X"

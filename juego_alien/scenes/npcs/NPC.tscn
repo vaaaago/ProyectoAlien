@@ -1,12 +1,22 @@
-[gd_scene load_steps=5 format=3 uid="uid://cyhwyyaw67eue"]
+[gd_scene load_steps=8 format=3 uid="uid://cyhwyyaw67eue"]
 
 [ext_resource type="Script" uid="uid://kdcn5xvatn53" path="res://scripts/npcs/npc.gd" id="1_k75in"]
+[ext_resource type="Script" uid="uid://klusu8or4bqi" path="res://resources/dialog/dialog.gd" id="2_3ak68"]
 [ext_resource type="PackedScene" uid="uid://3fes6lci8xkr" path="res://assets/character/Rogue_Hooded.glb" id="2_yq5wv"]
+[ext_resource type="PackedScene" uid="uid://djsgc46puimbf" path="res://scenes/ui/DialogManager.tscn" id="4_se8i8"]
+
+[sub_resource type="Resource" id="Resource_se8i8"]
+script = ExtResource("2_3ak68")
+dialogs = {}
+metadata/_custom_type_script = "uid://klusu8or4bqi"
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_fwc6w"]
 height = 1.62957
 
 [sub_resource type="FontFile" id="FontFile_k75in"]
+subpixel_positioning = 0
+msdf_pixel_range = 14
+msdf_size = 128
 cache/0/34/0/ascent = 0.0
 cache/0/34/0/descent = 0.0
 cache/0/34/0/underline_position = 0.0
@@ -20,6 +30,7 @@ cache/0/16/0/scale = 1.0
 
 [node name="NPC" type="CharacterBody3D" groups=["NPC"]]
 script = ExtResource("1_k75in")
+dialog_resource = SubResource("Resource_se8i8")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(-2, 0, -1.74846e-07, 0, 2, 0, 1.74846e-07, 0, -2, -0.000982821, 1.87253, 4.50611e-05)
@@ -53,5 +64,7 @@ transform = Transform3D(0.999999, 2.0298e-07, -4.52757e-07, -3.93247e-07, -6.761
 
 [node name="Rogue_Cape" parent="Rogue_Hooded/Rig/Skeleton3D" index="5"]
 transform = Transform3D(1, 1.25214e-21, 0, -1.25214e-21, 1, 0, 0, 0, 1, 0, 1.21587, 0)
+
+[node name="DialogManager" parent="." instance=ExtResource("4_se8i8")]
 
 [editable path="Rogue_Hooded"]

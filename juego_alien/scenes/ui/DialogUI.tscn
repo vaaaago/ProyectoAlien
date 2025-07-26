@@ -1,0 +1,66 @@
+[gd_scene load_steps=4 format=3 uid="uid://we0qh31mh4ob"]
+
+[ext_resource type="Script" uid="uid://wa7g2movicug" path="res://scripts/ui/DialogUI.gd" id="1_cv4ms"]
+[ext_resource type="Texture2D" uid="uid://bnfi7peycbb2o" path="res://assets/png/triangle tile.png" id="2_e1qh0"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4f8ut"]
+texture = ExtResource("2_e1qh0")
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 1
+
+[node name="DialogUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_cv4ms")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Panel" type="Panel" parent="CanvasLayer"]
+self_modulate = Color(1, 1, 1, 0.615686)
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -440.0
+offset_top = -138.0
+offset_right = 440.0
+offset_bottom = -30.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxTexture_4f8ut")
+
+[node name="DialogBox" type="VBoxContainer" parent="CanvasLayer/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = -5.0
+offset_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 15
+
+[node name="DialogSpeaker" type="Label" parent="CanvasLayer/Panel/DialogBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Mr Krabs"
+
+[node name="DialogText" type="Label" parent="CanvasLayer/Panel/DialogBox"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 23
+text = "Hey man!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DialogOptions" type="HBoxContainer" parent="CanvasLayer/Panel/DialogBox"]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1

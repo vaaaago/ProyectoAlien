@@ -1,16 +1,29 @@
-[gd_scene load_steps=10 format=3 uid="uid://crv23qyeek0lx"]
+[gd_scene load_steps=15 format=3 uid="uid://crv23qyeek0lx"]
 
 [ext_resource type="Script" uid="uid://btefbfjhrskrr" path="res://scripts/game.gd" id="1_yqjtg"]
-[ext_resource type="PackedScene" uid="uid://we0qh31mh4ob" path="res://scenes/ui/DialogBox.tscn" id="3_lbhrr"]
 [ext_resource type="PackedScene" uid="uid://bfovatv4sv4ou" path="res://scenes/world/world_map.tscn" id="3_lnu2h"]
-[ext_resource type="PackedScene" uid="uid://742pqeb1s6s7" path="res://scenes/quests/quest_test/QuestItem.tscn" id="4_iywne"]
+[ext_resource type="Script" uid="uid://dl473pmpukysw" path="res://scripts/ui/hud.gd" id="3_vtaks"]
+[ext_resource type="PackedScene" uid="uid://742pqeb1s6s7" path="res://scenes/quest/quest_test/QuestItem.tscn" id="4_iywne"]
 [ext_resource type="Texture2D" uid="uid://c36anu74d1y13" path="res://assets/character/crosshair001.png" id="4_p57ef"]
-[ext_resource type="Script" uid="uid://cndmtjn4est1w" path="res://scripts/crosshair.gd" id="4_u5sy4"]
+[ext_resource type="PackedScene" uid="uid://cnqk3gs84y0y5" path="res://scenes/ui/Inventory.tscn" id="5_0tnpc"]
 [ext_resource type="PackedScene" uid="uid://cyhwyyaw67eue" path="res://scenes/npcs/NPC.tscn" id="6_p57ef"]
+[ext_resource type="PackedScene" uid="uid://douf0cqpwaula" path="res://scenes/ui/QuestTrack.tscn" id="6_vtaks"]
+[ext_resource type="PackedScene" uid="uid://mx8h84ugjl18" path="res://assets/item/Can_B.gltf" id="7_gee14"]
+[ext_resource type="Script" uid="uid://klusu8or4bqi" path="res://resources/dialog/dialog.gd" id="10_vtaks"]
 
 [sub_resource type="FontVariation" id="FontVariation_lnu2h"]
 
 [sub_resource type="FontVariation" id="FontVariation_lbhrr"]
+
+[sub_resource type="Resource" id="Resource_kvpfn"]
+script = ExtResource("10_vtaks")
+dialogs = {}
+metadata/_custom_type_script = "uid://klusu8or4bqi"
+
+[sub_resource type="Resource" id="Resource_dinhu"]
+script = ExtResource("10_vtaks")
+dialogs = {}
+metadata/_custom_type_script = "uid://klusu8or4bqi"
 
 [node name="Game" type="Node3D"]
 script = ExtResource("1_yqjtg")
@@ -62,9 +75,14 @@ theme_override_fonts/font = SubResource("FontVariation_lbhrr")
 theme_override_font_sizes/font_size = 15
 text = "Join Game"
 
-[node name="DialogBox" parent="CanvasLayer" instance=ExtResource("3_lbhrr")]
+[node name="HUD" type="CanvasLayer" parent="."]
+script = ExtResource("3_vtaks")
 
-[node name="Crosshair" type="Control" parent="CanvasLayer"]
+[node name="Inventory" parent="HUD" instance=ExtResource("5_0tnpc")]
+
+[node name="QuestTrack" parent="HUD" instance=ExtResource("6_vtaks")]
+
+[node name="Crosshair" type="Control" parent="HUD"]
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -78,9 +96,8 @@ offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
-script = ExtResource("4_u5sy4")
 
-[node name="cross" type="TextureRect" parent="CanvasLayer/Crosshair"]
+[node name="cross" type="TextureRect" parent="HUD/Crosshair"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 1
 anchors_preset = 8
@@ -104,11 +121,22 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12.3837, 0)
 
 [node name="QuestItem" parent="." instance=ExtResource("4_iywne")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.25237, 2.10121, 0)
+item_mesh = ExtResource("7_gee14")
 
 [node name="NPC" parent="." instance=ExtResource("6_p57ef")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.9732, 0.285527, -11.2136)
+npc_id = "npc_1"
+npc_name = "weon con arco"
+dialog_resource = SubResource("Resource_kvpfn")
+
+[node name="NPC2" parent="." instance=ExtResource("6_p57ef")]
+transform = Transform3D(0.124814, 0, -0.99218, 0, 1, 0, 0.99218, 0, 0.124814, 28.4189, 0, 0)
+npc_id = "npc_2"
+npc_name = "carevio"
+dialog_resource = SubResource("Resource_dinhu")
 
 [connection signal="pressed" from="CanvasLayer/MultiplayerHUD/Panel/VBoxContainer/HostGame" to="." method="become_host"]
 [connection signal="pressed" from="CanvasLayer/MultiplayerHUD/Panel/VBoxContainer/JoinGame" to="." method="join_game"]
 
-[editable path="CanvasLayer/DialogBox"]
+[editable path="HUD/Inventory"]
+[editable path="HUD/QuestTrack"]
